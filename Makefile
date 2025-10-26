@@ -20,8 +20,7 @@ CC 				= 	nasm
 
 #=========== FLAGS ============#
 
-ASMFLAGS 		= 	
-
+ASMFLAGS 		= 	-f elf64
 MAKEFLAGS		=	--no-print-directory
 
 #=========== COLOR ============#
@@ -70,7 +69,7 @@ $(NAME):	$(OBJ)
 	@$(CC) $(ASMFLAGS) -o $(NAME) $(OBJ)
 	@echo "$(GREEN)libasm successfully compiled! $(BASE_COLOR)"
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+$(OBJ_DIR)%.o:$(SRC_DIR)%.s
 	@mkdir -p $(dir $@)
 	@$(CC) $(ASMFLAGS) $< -c -o $@
 	@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
