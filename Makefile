@@ -39,9 +39,19 @@ WHITE				=	\033[0;97m
 #========== SOURCES ===========#
 
 SRC_DIR 			=	src/
-SRC_NAMES 		=	
+SRC_NAMES 		=	ft_strlen.s \
+						ft_strcpy.s \
+						ft_strcmp.s \
+						ft_write.s \
+						ft_read.s \
+						ft_strdup.s
 
-SRC_NAMES_B		=
+SRC_NAMES_B		=	ft_strlen.s \
+						ft_strcpy.s \
+						ft_strcmp.s \
+						ft_write.s \
+						ft_read.s \
+						ft_strdup.s
 
 SRC 				=	$(addprefix $(SRC_DIR), $(SRC_NAMES))
 SRC_BONUS		=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))
