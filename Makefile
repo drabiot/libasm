@@ -21,7 +21,6 @@ CC 				= 	nasm
 #=========== FLAGS ============#
 
 ASMFLAGS 		= 	-f elf64
-MAKEFLAGS		=	--no-print-directory
 
 #=========== COLOR ============#
 
@@ -56,8 +55,8 @@ SRC 				=	$(addprefix $(SRC_DIR), $(SRC_NAMES))
 SRC_BONUS		=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))
 
 OBJ_DIR 			= 	obj/
-OBJ_NAME 		= 	$(SRC_NAMES:.c=.o)
-OBJ_NAME_B		=	$(SRC_NAMES_B:.c=.o)
+OBJ_NAME 		= 	$(SRC_NAMES:.s=.o)
+OBJ_NAME_B		=	$(SRC_NAMES_B:.s=.o)
 OBJ 				= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME))
 OBJ_BONUS 		= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
 
@@ -65,8 +64,7 @@ OBJ_BONUS 		= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	@make --no-print-directory full
-	@$(CC) $(ASMFLAGS) -o $(NAME) $(OBJ)
+	ar -rcs $(NAME) $(OBJ) 
 	@echo "$(GREEN)libasm successfully compiled! $(BASE_COLOR)"
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.s
@@ -77,7 +75,7 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.s
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS)
-	@$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS)
+	ar -rcs $(NAME_BONUS) $(OBJ_BONUS) 
 	@echo "$(GREEN)libasm bonuses successfully compiled! $(BASE_COLOR)"
 
 clean:
