@@ -6,7 +6,7 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 16:19:26 by tchartie          #+#    #+#              #
-#    Updated: 2025/10/27 21:19:56 by tchartie         ###   ########.fr        #
+#    Updated: 2025/10/27 21:58:35 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,19 @@
 NAME				= 	libasm.a
 NAME_BONUS		=	libasm_bonus.a
 
+NAME_TEST		=	tester
+
 #========= COMPILATOR =========#
 
-CC 				= 	nasm
+CASM 				= 	nasm
+
+CC					=	cc
 
 #=========== FLAGS ============#
 
 ASMFLAGS 		= 	-f elf64
+
+CFLAGS			=	-Wall -Wextra -Werror
 
 #=========== COLOR ============#
 
@@ -52,14 +58,21 @@ SRC_NAMES_B		=	ft_strlen.s \
 						ft_read.s \
 						ft_strdup.s
 
+TEST_DIR			=	ressources/
+TEST_NAMES		=	main.c
+
 SRC 				=	$(addprefix $(SRC_DIR), $(SRC_NAMES))
 SRC_BONUS		=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))
+
+TEST				=	$(addprefix $(TEST_DIR), $(TEST_NAMES))
 
 OBJ_DIR 			= 	obj/
 OBJ_NAME 		= 	$(SRC_NAMES:.s=.o)
 OBJ_NAME_B		=	$(SRC_NAMES_B:.s=.o)
+OBJ_NAME_T		=	$(TEST_NAMES:.c=.o)
 OBJ 				= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME))
 OBJ_BONUS 		= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
+OBJ_TEST			=	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_T))
 
 
 all:		$(NAME)
@@ -70,14 +83,23 @@ $(NAME):	$(OBJ)
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.s
 	@mkdir -p $(dir $@)
-	@$(CC) $(ASMFLAGS) $< -o $@
+	@$(CASM) $(ASMFLAGS) $< -o $@
+	@echo "$(MAGENTA)Compiling: $< $(BASE_COLOR)"
+
+$(OBJ_DIR)%.o:$(TEST_DIR)%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 
-bonus: $(NAME_BONUS)
+bonus:	$(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	@ar -rcs $(NAME_BONUS) $(OBJ_BONUS) 
 	@echo "$(GREEN)libasm bonuses successfully compiled! $(BASE_COLOR)"
+
+tester:		all $(OBJ_TEST)
+	@$(CC) $(CFLAGS) $(OBJ_TEST) -L. -lasm -o $(NAME_TEST) 
+	@echo "$(GREEN)Tester successfully compiled! $(BASE_COLOR)"
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -86,8 +108,10 @@ clean:
 fclean:	clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_BONUS)
+	@rm -f $(NAME_TEST)
 	@echo "$(CYAN)libasm executable file$(BLUE)" $(NAME) "$(CYAN)&$(BLUE) "$(NAME_BONUS)" $(CYAN)cleanned!$(BASE_COLOR)"
+	@echo "$(MAGENTA)Tester objects files cleanned! $(BASE_COLOR)"
 
 re: fclean all 
 
-.PHONY :	all bonus clean fclean re
+.PHONY :	all bonus test clean fclean re
