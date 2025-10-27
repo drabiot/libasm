@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2025/10/27 23:09:27 by tchartie         ###   ########.fr       */
+/*   Updated: 2025/10/27 23:11:58 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,20 @@ int	main(int argc, char **argv) {
 	char	src[50] = "This is a serious Test!";	
 
 	printf(GREEN"String that will be copy:  "YELLOW"%s\n"BASE_COLOR, src);
-	printf(GREEN"Original Dest State:       "YELLOW"%s\n"GREEN"ft Dest State:             "YELLOW"%s\n"BASE_COLOR, og_dest, ft_dest);
+	printf(GREEN"Original Dest State:       "YELLOW"%s\n" \
+			 GREEN"ft Dest State:             "YELLOW"%s\n"BASE_COLOR, og_dest, ft_dest);
 
 	strcpy(og_dest, src);
 	ft_strcpy(ft_dest, src);
 	
-	printf(CYAN"Original Dest State:       "BLUE"%s\n"CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
+	printf(CYAN"Original Dest State:       "BLUE"%s\n" \
+			 CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
 
 	strcpy(src, "Check for Deep Copy");
 
 	printf(GREEN"\nChange src content with:   "YELLOW"%s\n"BASE_COLOR, src);
-	printf(CYAN"Original Dest State:       "BLUE"%s\n"CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
+	printf(CYAN"Original Dest State:       "BLUE"%s\n" \
+			 CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
 
 	return (0);
 }
