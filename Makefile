@@ -6,13 +6,14 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 16:19:26 by tchartie          #+#    #+#              #
-#    Updated: 2025/10/26 16:19:26 by tchartie         ###   ########.fr        #
+#    Updated: 2025/10/27 21:19:56 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #============ NAME ============#
 
 NAME				= 	libasm.a
+NAME_BONUS		=	libasm_bonus.a
 
 #========= COMPILATOR =========#
 
@@ -64,18 +65,18 @@ OBJ_BONUS 		= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	ar -rcs $(NAME) $(OBJ) 
+	@ar -rcs $(NAME) $(OBJ) 
 	@echo "$(GREEN)libasm successfully compiled! $(BASE_COLOR)"
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.s
 	@mkdir -p $(dir $@)
-	@$(CC) $(ASMFLAGS) $< -c -o $@
+	@$(CC) $(ASMFLAGS) $< -o $@
 	@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS)
-	ar -rcs $(NAME_BONUS) $(OBJ_BONUS) 
+	@ar -rcs $(NAME_BONUS) $(OBJ_BONUS) 
 	@echo "$(GREEN)libasm bonuses successfully compiled! $(BASE_COLOR)"
 
 clean:
@@ -85,7 +86,7 @@ clean:
 fclean:	clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_BONUS)
-	@echo "$(CYAN)libasm executable file $(BLUE)" $(NAME) "$(CYAN)&$(BLUE) " $(NAME_BONUS) "cleanned!$(BASE_COLOR)"
+	@echo "$(CYAN)libasm executable file$(BLUE)" $(NAME) "$(CYAN)&$(BLUE) "$(NAME_BONUS)" $(CYAN)cleanned!$(BASE_COLOR)"
 
 re: fclean all 
 
