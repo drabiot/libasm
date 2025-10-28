@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2025/10/27 23:11:58 by tchartie         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:07:48 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,25 @@ int	main(int argc, char **argv) {
 	printf(CYAN"Original Dest State:       "BLUE"%s\n" \
 			 CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
 
+
+	//FT_STRCMP
+	printf(RED"\nFT_STRCMP TESTER\n"BASE_COLOR);
+
+	printf(GREEN"strcmp: "YELLOW"This is a serious Test!"GREEN" and"YELLOW" This isn't a serious Test!"GREEN":\n"BASE_COLOR);
+	printf(CYAN"original: "BLUE"%d\n"BASE_COLOR, strcmp("This is a serious Test!", "This isn't a serious Test!"));
+	printf(CYAN"ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This is a serious Test!", "This isn't a serious Test!"));
+
+	printf(GREEN"\nstrcmp: "YELLOW"This is a serious Test!"GREEN" and"YELLOW" This is a serious Test!"GREEN":\n"BASE_COLOR);
+	printf(CYAN"original: "BLUE"%d\n"BASE_COLOR, strcmp("This is a serious Test!", "This is a serious Test!"));
+	printf(CYAN"ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This is a serious Test!", "This is a serious Test!"));
+
+	printf(GREEN"\nstrcmp: "YELLOW"This isn't a serious Test!"GREEN" and"YELLOW" This is a serious Test!"GREEN":\n"BASE_COLOR);
+	printf(CYAN"original: "BLUE"%d\n"BASE_COLOR, strcmp("This isn't a serious Test!", "This is a serious Test!"));
+	printf(CYAN"ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This isn't a serious Test!", "This is a serious Test!"));
+
+	printf(GREEN"\nstrcmp: "YELLOW"Test"GREEN" and"YELLOW" Hello World"GREEN":\n"BASE_COLOR);
+	printf(CYAN"original: "BLUE"%d\n"BASE_COLOR, strcmp("Test", "Hello World"));
+	printf(CYAN"ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("Test", "Hello World"));
+	
 	return (0);
 }
