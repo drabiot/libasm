@@ -6,7 +6,7 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 16:19:26 by tchartie          #+#    #+#              #
-#    Updated: 2026/05/11 20:48:44 by tchartie         ###   ########.fr        #
+#    Updated: 2026/05/11 21:45:30 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ SRC_NAMES_B			=	ft_strlen.s \
 						ft_strdup.s
 
 TEST_DIR			=	ressources/
-TEST_NAMES			=	main.c
+TEST_NAMES			=	main.c \
+						utils.c
 
 SRC 				=	$(addprefix $(SRC_DIR), $(SRC_NAMES))
 SRC_BONUS			=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))

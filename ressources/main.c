@@ -6,77 +6,42 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 21:03:32 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:47:23 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 #include "color.h"
+#include "include.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <errno.h>
-
-#include <string.h>
-
-int	main(int argc, char **argv) {
-	(void)argc;
+int	main(void) {
 
 	// FT_STRLEN
 	printf(RED"\nFT_STRLEN TESTER\n"BASE_COLOR);
-	char	*input = "Default";
-	
-	if (argv[1])
-		input = argv[1];
 
-	printf(GREEN"Analyze size of" YELLOW" %s\n"BASE_COLOR, input);
-	printf(CYAN"Regular strlen:     "BLUE"%lu\n"BASE_COLOR, strlen(input));
-	printf(CYAN"Assembly ft_strlen: "BLUE"%lu\n"BASE_COLOR, ft_strlen(input));
+	test_strlen("Hello World!");
+	test_strlen("");
+	test_strlen(" ");
+	test_strlen("Hello\tWorld\t!\t");
 
 
 	//FT_STRCPY
 	printf(RED"\nFT_STRCPY TESTER\n"BASE_COLOR);
-	char	og_dest[50] = "original";
-	char	ft_dest[50] = "ft";
-	char	src[50] = "This is a serious Test!";	
 
-	printf(GREEN"String that will be copy:  "YELLOW"%s\n"BASE_COLOR, src);
-	printf(GREEN"Original Dest State:       "YELLOW"%s\n" \
-			 GREEN"ft Dest State:             "YELLOW"%s\n"BASE_COLOR, og_dest, ft_dest);
-
-	strcpy(og_dest, src);
-	ft_strcpy(ft_dest, src);
-	
-	printf(CYAN"Original Dest State:       "BLUE"%s\n" \
-			 CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
-
-	strcpy(src, "Check for Deep Copy");
-
-	printf(GREEN"\nChange src content with:   "YELLOW"%s\n"BASE_COLOR, src);
-	printf(CYAN"Original Dest State:       "BLUE"%s\n" \
-			 CYAN"ft Dest State:             "BLUE"%s\n"BASE_COLOR, og_dest, ft_dest);
+	test_strcpy("Hello World!");
+    test_strcpy("42");
+    test_strcpy("");
+    test_strcpy("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit lacus, convallis eget velit ac, aliquet tempus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac dui et libero lobortis auctor. Quisque eget nisi vitae magna scelerisque cursus. Sed tincidunt eros quis orci rutrum, id condimentum dolor facilisis. Fusce ultrices diam eu dui tincidunt, sed interdum nisi dictum. Vivamus in urna eu erat blandit sollicitudin nec in ante. Aliquam vestibulum tellus pulvinar pellentesque tincidunt. Donec commodo sagittis augue tincidunt congue. Donec non feugiat nibh, et interdum nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse tincidunt bibendum efficitur..");
 
 
 	//FT_STRCMP
 	printf(RED"\nFT_STRCMP TESTER\n"BASE_COLOR);
 
-	printf(GREEN"Strcmp: "YELLOW"This is a serious Test!"GREEN" and"YELLOW" This isn't a serious Test!"GREEN":\n"BASE_COLOR);
-	printf(CYAN"Original: "BLUE"%d\n"BASE_COLOR, strcmp("This is a serious Test!", "This isn't a serious Test!"));
-	printf(CYAN"Ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This is a serious Test!", "This isn't a serious Test!"));
-
-	printf(GREEN"\nStrcmp: "YELLOW"This is a serious Test!"GREEN" and"YELLOW" This is a serious Test!"GREEN":\n"BASE_COLOR);
-	printf(CYAN"Original: "BLUE"%d\n"BASE_COLOR, strcmp("This is a serious Test!", "This is a serious Test!"));
-	printf(CYAN"Ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This is a serious Test!", "This is a serious Test!"));
-
-	printf(GREEN"\nStrcmp: "YELLOW"This isn't a serious Test!"GREEN" and"YELLOW" This is a serious Test!"GREEN":\n"BASE_COLOR);
-	printf(CYAN"Original: "BLUE"%d\n"BASE_COLOR, strcmp("This isn't a serious Test!", "This is a serious Test!"));
-	printf(CYAN"Ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("This isn't a serious Test!", "This is a serious Test!"));
-
-	printf(GREEN"\nStrcmp: "YELLOW"Test"GREEN" and"YELLOW" Hello World"GREEN":\n"BASE_COLOR);
-	printf(CYAN"Original: "BLUE"%d\n"BASE_COLOR, strcmp("Test", "Hello World"));
-	printf(CYAN"Ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("Test", "Hello World"));
+	test_strcmp("This is a serious Test!", "This isn't a serious Test!");
+	test_strcmp("This is a serious Test!", "This is a serious Test!");
+	test_strcmp("", "");
+	test_strcmp("This is a serious Test!", "");
+	test_strcmp("\xff", "\x01");
 	
 
 	//FT_WRITE
@@ -84,42 +49,12 @@ int	main(int argc, char **argv) {
 
 
 	// FT_READ TESTER
-	int tmp_fd = open("test_read.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	write(tmp_fd, "42 is the answer to everything.", 31);
-	lseek(tmp_fd, 0, SEEK_SET);
+	printf(RED "\nFT_READ TESTER\n" BASE_COLOR);
+	
+	test_read();
 
-	char buffer[100];
-	memset(buffer, 0, 100);
-
-	// Test read file
-	printf(GREEN"Reading from a file:\n"BASE_COLOR);
-	ssize_t original_ret = read(tmp_fd, buffer, 31);
-	lseek(tmp_fd, 0, SEEK_SET);
-	ssize_t ft_ret = ft_read(tmp_fd, buffer, 31);
-	printf(CYAN"Content:			"BLUE"[%s]\n"BASE_COLOR, buffer);
-	printf(CYAN"Original: Number of Bytes:	"BLUE"%ld\n"BASE_COLOR, original_ret);
-	printf(CYAN"Ft: Number of Bytes:		"BLUE"%ld\n"BASE_COLOR, ft_ret);
-
-	// Test FD error
-	printf(GREEN"Test with invalid FD (-1):\n"BASE_COLOR);
-	errno = 0;
-	original_ret = read(-1, buffer, 10);
-	lseek(tmp_fd, 0, SEEK_SET);
-	ft_ret = ft_read(-1, buffer, 10);
-	printf(CYAN"Original: Return value:		"BLUE"%ld | Errno: "MAGENTA"%d (%s)\n"BASE_COLOR, original_ret, errno, strerror(errno));
-	printf(CYAN"Ft: Return value:		"BLUE"%ld | Errno: "MAGENTA"%d (%s)\n"BASE_COLOR, ft_ret, errno, strerror(errno));
-
-	// Test NULL Buffer error
-	printf(GREEN"Test with NULL Buffer:\n"BASE_COLOR);
-	errno = 0;
-	original_ret = read(tmp_fd, NULL, 10);
-	lseek(tmp_fd, 0, SEEK_SET);
-	ft_ret = ft_read(tmp_fd, NULL, 10);
-	printf(CYAN"Original: Return value:		"BLUE"%ld | Errno: "MAGENTA"%d (%s)\n"BASE_COLOR, original_ret, errno, strerror(errno));
-	printf(CYAN"Ft: Return value:		"BLUE"%ld | Errno: "MAGENTA"%d (%s)\n"BASE_COLOR, ft_ret, errno, strerror(errno));
-
-	close(tmp_fd);
-	remove("test_read.txt");
+	// FT_STRDUP TESTER
+	printf(RED "\nFT_STRDUP TESTER\n" BASE_COLOR);
 		
 	printf(RED"\nEND OF TESTS\n"BASE_COLOR);
 	return (0);
