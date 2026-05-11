@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 21:42:54 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 21:46:21 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:17:43 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,52 @@ static void display_result(char *test_name, ssize_t og_ret, ssize_t ft_ret, int 
     if (!is_ok)
         printf(RED " (Mismatch!)" BASE_COLOR);
     printf("\n");
+}
+
+void test_write(void) {
+    ssize_t r_og, r_ft;
+    int     e_og, e_ft;
+
+    // --- TEST 1 : STDOUT ---
+    printf(YELLOW "Test 1: Writing to STDOUT\n" BASE_COLOR);
+    
+    errno = 0;
+    printf(CYAN "[Original] :\t" BASE_COLOR);
+    r_og = write(1, "Hello World!\n", 13);
+    e_og = errno;
+
+    errno = 0;
+    printf(CYAN "[Yours]    :\t" BASE_COLOR);
+    r_ft = ft_write(1, "Hello World!\n", 13);
+    e_ft = errno;
+    
+    display_result(MAGENTA"\n  => Match STDOUT\n"BASE_COLOR, r_og, r_ft, e_og, e_ft);
+
+    // --- TEST 2 : ERREUR (FD INVALID) ---
+    printf(YELLOW "\nTest 2: Invalid File Descriptor (-42)\n" BASE_COLOR);
+    
+    errno = 0;
+    r_og = write(-42, "test", 4);
+    e_og = errno;
+
+    errno = 0;
+    r_ft = ft_write(-42, "test", 4);
+    e_ft = errno;
+    
+    display_result(MAGENTA"  => Match Error FD\n"BASE_COLOR, r_og, r_ft, e_og, e_ft);
+
+    // --- TEST 3 : ERREUR (BUFFER NULL) ---
+    printf(YELLOW "\nTest 3: NULL Buffer\n" BASE_COLOR);
+    
+    errno = 0;
+    r_og = write(1, NULL, 10);
+    e_og = errno;
+
+    errno = 0;
+    r_ft = ft_write(1, NULL, 10);
+    e_ft = errno;
+    
+    display_result(MAGENTA"  => Match Error NULL\n"BASE_COLOR, r_og, r_ft, e_og, e_ft);
 }
 
 void	test_read(void) {

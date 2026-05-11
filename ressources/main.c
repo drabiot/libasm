@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 21:47:23 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:08:45 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(void) {
 
 	//FT_WRITE
 	printf(RED"\nFT_WRITE TESTER\n"BASE_COLOR);
+
+	test_write();
 
 
 	// FT_READ TESTER
