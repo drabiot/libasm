@@ -15,12 +15,12 @@ ft_strcmp:
 
 .diff:
 	movzx eax, al		;move with zero-extend src 8-bits register into a 32-bits register
-	movzx	edx, dl		;move with zero-extend dest 8-bits register into a 32-bits register
+	movzx edx, dl		;move with zero-extend dest 8-bits register into a 32-bits register
 	sub eax, edx		;substract src with dest byte
 	ret
 
 .equal:
 	xor eax, eax		;create a 32-bits register that will be our int return value
-							;replace mov eax, 0
-							;faster for the CPU - 2 bytes against 5 bytes instruction
+						;replace mov eax, 0
+						;faster for the CPU - 2 bytes against 5 bytes instruction
 	ret

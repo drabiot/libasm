@@ -6,16 +6,16 @@
 #    By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 16:19:26 by tchartie          #+#    #+#              #
-#    Updated: 2025/10/27 21:58:35 by tchartie         ###   ########.fr        #
+#    Updated: 2026/05/11 20:48:44 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #============ NAME ============#
 
 NAME				= 	libasm.a
-NAME_BONUS		=	libasm_bonus.a
+NAME_BONUS			=	libasm_bonus.a
 
-NAME_TEST		=	tester
+NAME_TEST			=	tester
 
 #========= COMPILATOR =========#
 
@@ -25,33 +25,33 @@ CC					=	cc
 
 #=========== FLAGS ============#
 
-ASMFLAGS 		= 	-f elf64
+ASMFLAGS 			= 	-f elf64
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror
 
 #=========== COLOR ============#
 
-BASE_COLOR 		=	\033[0;39m
+BASE_COLOR 			=	\033[0;39m
 GRAY 				=	\033[0;90m
 RED 				=	\033[0;91m
-GREEN 			=	\033[0;92m
-YELLOW 			=	\033[0;93m
+GREEN 				=	\033[0;92m
+YELLOW 				=	\033[0;93m
 BLUE 				=	\033[0;94m
-MAGENTA			=	\033[0;95m
+MAGENTA				=	\033[0;95m
 CYAN 				=	\033[0;96m
 WHITE				=	\033[0;97m
 
 #========== SOURCES ===========#
 
 SRC_DIR 			=	src/
-SRC_NAMES 		=	ft_strlen.s \
+SRC_NAMES 			=	ft_strlen.s \
 						ft_strcpy.s \
 						ft_strcmp.s \
 						ft_write.s \
 						ft_read.s \
 						ft_strdup.s
 
-SRC_NAMES_B		=	ft_strlen.s \
+SRC_NAMES_B			=	ft_strlen.s \
 						ft_strcpy.s \
 						ft_strcmp.s \
 						ft_write.s \
@@ -59,19 +59,19 @@ SRC_NAMES_B		=	ft_strlen.s \
 						ft_strdup.s
 
 TEST_DIR			=	ressources/
-TEST_NAMES		=	main.c
+TEST_NAMES			=	main.c
 
 SRC 				=	$(addprefix $(SRC_DIR), $(SRC_NAMES))
-SRC_BONUS		=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))
+SRC_BONUS			=	$(addprefix $(SRC_DIR), $(SRC_NAMES_B))
 
 TEST				=	$(addprefix $(TEST_DIR), $(TEST_NAMES))
 
 OBJ_DIR 			= 	obj/
-OBJ_NAME 		= 	$(SRC_NAMES:.s=.o)
-OBJ_NAME_B		=	$(SRC_NAMES_B:.s=.o)
-OBJ_NAME_T		=	$(TEST_NAMES:.c=.o)
+OBJ_NAME 			= 	$(SRC_NAMES:.s=.o)
+OBJ_NAME_B			=	$(SRC_NAMES_B:.s=.o)
+OBJ_NAME_T			=	$(TEST_NAMES:.c=.o)
 OBJ 				= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME))
-OBJ_BONUS 		= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
+OBJ_BONUS 			= 	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_B))
 OBJ_TEST			=	$(patsubst %, $(OBJ_DIR)%, $(OBJ_NAME_T))
 
 
@@ -91,7 +91,7 @@ $(OBJ_DIR)%.o:$(TEST_DIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 
-bonus:	$(NAME_BONUS)
+bonus:		$(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	@ar -rcs $(NAME_BONUS) $(OBJ_BONUS) 
@@ -105,7 +105,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "$(BLUE)libasm objects files cleanned! $(BASE_COLOR)"
 
-fclean:	clean
+fclean:		clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_BONUS)
 	@rm -f $(NAME_TEST)
