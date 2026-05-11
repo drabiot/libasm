@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 21:42:54 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 22:17:43 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:40:23 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,46 @@ void	test_read(void) {
 
     close(tmp_fd);
     remove("test_read.txt");
+}
+
+void    test_strdup(char *input_text) {
+    char    *s_og;
+    char    *s_ft;
+    int     deep_copy_ok = 0;
+
+    // 1. Exécution des duplications
+    s_og = strdup(input_text);
+    s_ft = ft_strdup(input_text);
+
+    // 2. Test de la Deep Copy
+    // On modifie temporairement l'original (si non vide) pour voir si la copie bouge
+    if (strlen(input_text) > 0) {
+        char saved_char = input_text[0];
+        input_text[0] = 'Z'; // On vandalise la source
+        if (s_ft[0] != 'Z')   // Si la copie n'a pas le 'Z', c'est une deep copy !
+            deep_copy_ok = 1;
+        input_text[0] = saved_char; // On remet en état pour les tests suivants
+    } else {
+        deep_copy_ok = 1; // Cas chaîne vide : par défaut OK
+    }
+
+    // 3. Vérifications logiques
+    int content_match = (strcmp(s_og, s_ft) == 0);
+    int pointer_diff = (s_og != s_ft && s_ft != input_text);
+
+    // 4. Affichage du résultat
+    printf(YELLOW "Testing ft_strdup: " BLUE "[%s]\n" BASE_COLOR, input_text);
+    
+    if (content_match && pointer_diff && deep_copy_ok)
+        printf(GREEN "  [OK] " BASE_COLOR);
+    else
+        printf(RED "  [KO] " BASE_COLOR);
+
+    printf(MAGENTA "Content: " BLUE "[%s]" BASE_COLOR, s_ft);
+    printf(CYAN " | DeepCopy: " BLUE "%s" BASE_COLOR, deep_copy_ok ? "YES" : "NO");
+    printf(CYAN " | New Ptr: " BLUE "%s\n" BASE_COLOR, pointer_diff ? "YES" : "NO");
+
+    // 5. Nettoyage
+    free(s_og);
+    free(s_ft);
 }

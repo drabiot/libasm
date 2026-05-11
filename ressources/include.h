@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 21:41:40 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 22:07:41 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:37:41 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	test_strcpy(char *input_text);
 void	test_strcmp(char *s1, char *s2);
 void	test_write(void);
 void	test_read(void);
+void	test_strdup(char *src);
 
 #endif //INCLUDE_H

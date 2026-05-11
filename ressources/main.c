@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2026/05/11 22:08:45 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:42:49 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ int	main(void) {
 
 	// FT_STRDUP TESTER
 	printf(RED "\nFT_STRDUP TESTER\n" BASE_COLOR);
+
+	char	s1[] = "Hello World!";
+	char	s2[] = "42";
+	char	s3[] = "";
+	char	s4[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit lacus, convallis eget velit ac, aliquet tempus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam ac dui et libero lobortis auctor. Quisque eget nisi vitae magna scelerisque cursus. Sed tincidunt eros quis orci rutrum, id condimentum dolor facilisis. Fusce ultrices diam eu dui tincidunt, sed interdum nisi dictum. Vivamus in urna eu erat blandit sollicitudin nec in ante. Aliquam vestibulum tellus pulvinar pellentesque tincidunt. Donec commodo sagittis augue tincidunt congue. Donec non feugiat nibh, et interdum nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse tincidunt bibendum efficitur..";
+
+	test_strdup(s1);
+	test_strdup(s2);
+	test_strdup(s3);
+	test_strdup(s4);
 		
 	printf(RED"\nEND OF TESTS\n"BASE_COLOR);
 	return (0);
