@@ -6,17 +6,17 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:41:39 by tchartie          #+#    #+#             */
-/*   Updated: 2025/10/27 22:05:42 by tchartie         ###   ########.fr       */
+/*   Updated: 2026/05/11 20:22:17 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-# define BASE_COLOR	"\033[0m"
+# define BASE_COLOR		"\033[0m"
 # define GRAY 			"\033[0;90m"
 # define RED 			"\033[0;91m"
-# define GREEN 		"\033[0;92m"
+# define GREEN 			"\033[0;92m"
 # define YELLOW 		"\033[0;93m"
 # define BLUE 			"\033[0;94m"
 # define MAGENTA		"\033[0;95m"

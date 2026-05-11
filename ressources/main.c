@@ -6,7 +6,7 @@
 /*   By: tchartie <tchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:21:03 by tchartie          #+#    #+#             */
-/*   Updated: 2025/10/28 14:07:48 by tchartie         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:11:12 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv) {
 	printf(GREEN"Analyze size of" YELLOW" %s\n"BASE_COLOR, input);
 	printf(CYAN"Regular strlen:     "BLUE"%lu\n"BASE_COLOR, strlen(input));
 	printf(CYAN"Assembly ft_strlen: "BLUE"%lu\n"BASE_COLOR, ft_strlen(input));
+
 
 	//FT_STRCPY
 	printf(RED"\nFT_STRCPY TESTER\n"BASE_COLOR);
@@ -73,5 +74,13 @@ int	main(int argc, char **argv) {
 	printf(CYAN"original: "BLUE"%d\n"BASE_COLOR, strcmp("Test", "Hello World"));
 	printf(CYAN"ft:       "BLUE"%d\n"BASE_COLOR, ft_strcmp("Test", "Hello World"));
 	
+
+	//FT_WRITE
+	printf(RED"\nFT_WRITE TESTER\n"BASE_COLOR);
+
+
+	//FT_READ
+	printf(RED"\nFT_READ TESTER\n"BASE_COLOR);
+
 	return (0);
 }
