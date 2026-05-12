@@ -24,6 +24,6 @@ ft_strdup:
 	call	ft_strcpy		;strcpy(dest, src)
 	ret
 
-.error
+.error:
 	pop		rdi				;clear the stack
 	ret						;return null
