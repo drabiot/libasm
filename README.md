@@ -3,6 +3,10 @@
   </h1>
 </div>
 
+<div align="center">
+   <img width="200" height="170" alt="Screenshot from 2026-01-22 17-50-47" src="<img width="200" height="170" alt="Screenshot from 2026-05-13 16-33-02 (1)" src="https://github.com/user-attachments/assets/21abc416-1dfe-4623-9464-8553cf92c1c7" />
+" />
+</div>
 
 ---
 
